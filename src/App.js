@@ -18,6 +18,10 @@ function App() {
   if (auth.error) {
     return <div>Encountering error... {auth.error.message}</div>;
   }
+const signInRedirect = () => {
+  const redirectUri = 'https://main.d3vjsffdail7l2.amplifyapp.com/'; // Set this to your local development URL
+  auth.signinRedirect({ redirectUri });
+};
 
   if (auth.isAuthenticated) {
     return (
@@ -26,6 +30,7 @@ function App() {
         <p>Hello, {auth.user?.profile.email}!</p>
         <p>You have successfully signed in.</p>
         <button onClick={() => auth.removeUser()}>Sign out</button>
+        <button>Click Me</button> {/* This button only appears when authenticated */}
       </div>
     );
   }
