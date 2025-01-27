@@ -5,9 +5,9 @@ function playdate() {
   const auth = useAuth();
 
   const signOutRedirect = () => {
-    const clientId = 'clientidhere';
-    const logoutUri = 'thisFieldHasBeenAVarietyOfThings'; 
-    const cognitoDomain = 'myactualcognitodomainhere'; 
+    const clientId = 'm2rogeivplk4o2tccvkngrk3c';
+    const logoutUri = 'https://d84l1y8p4kdic.cloudfront.net'; 
+    const cognitoDomain = 'https://us-east-2f8bywcth0.auth.us-east-2.amazoncognito.com'; 
     window.location.href = `${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${encodeURIComponent(logoutUri)}`;
   };
 
@@ -19,7 +19,7 @@ function playdate() {
     return <div>Error... {auth.error.message}</div>;
   }
 const signInRedirect = () => {
-  const redirectUri = 'thisFieldHasBeenAVarietyOfThings';
+  const redirectUri = 'https://d84l1y8p4kdic.cloudfront.net';
   auth.signinRedirect({ redirectUri });
 };
 
