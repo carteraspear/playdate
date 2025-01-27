@@ -1,7 +1,7 @@
 import './App.css';
 import { useAuth } from 'react-oidc-context';
 
-function playdate() {
+function Playdate() {
   const auth = useAuth();
 
   const signOutRedirect = () => {
@@ -44,4 +44,4 @@ const signInRedirect = () => {
   );
 }
 
-export default playdate;
+export default Playdate;
