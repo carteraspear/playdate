@@ -1,31 +1,20 @@
 import './App.css';
 import { useAuth } from 'react-oidc-context';
-import { useEffect } from 'react';
 
 function Playdate() {
   const auth = useAuth();
 
   const signOutRedirect = () => {
     const clientId = 'm2rogeivplk4o2tccvkngrk3c';
-    const logoutUri = 'https://main.d3vjsffdail7l2.amplifyapp.com/'; 
+    const logoutUri = 'https://us-east-2f8bywcth0.auth.us-east-2.amazoncognito.com'; 
     const cognitoDomain = 'https://us-east-2f8bywcth0.auth.us-east-2.amazoncognito.com'; 
     window.location.href = `${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${encodeURIComponent(logoutUri)}`;
   };
 
   const signInRedirect = () => {
-    const redirectUri = 'https://main.d3vjsffdail7l2.amplifyapp.com/';
+    const redirectUri = 'https://us-east-2f8bywcth0.auth.us-east-2.amazoncognito.com';
     auth.signinRedirect({ redirectUri });
   };
-
-  useEffect(() => {
-    // Handle the redirect callback if the user is returning from the authentication server
-    if (window.location.href.includes('code=') || window.location.href.includes('id_token=')) {
-      auth.signinRedirectCallback().then(() => {
-        // Clear the URL parameters after handling the callback
-        window.history.replaceState({}, document.title, window.location.pathname);
-      });
-    }
-  }, [auth]);
 
   if (auth.isLoading) {
     return <div>loading...</div>;
