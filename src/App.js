@@ -6,13 +6,13 @@ function Playdate() {
 
   const signOutRedirect = () => {
     const clientId = 'm2rogeivplk4o2tccvkngrk3c';
-    const logoutUri = 'https://d84l1y8p4kdic.cloudfront.net/'; 
+    const logoutUri = 'https://main.d3vjsffdail7l2.amplifyapp.com/'; 
     const cognitoDomain = 'https://us-east-2f8bywcth0.auth.us-east-2.amazoncognito.com'; 
     window.location.href = `${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${encodeURIComponent(logoutUri)}`;
   };
 
   const signInRedirect = () => {
-    const redirectUri = 'https://d84l1y8p4kdic.cloudfront.net/callback';
+    const redirectUri = 'https://main.d3vjsffdail7l2.amplifyapp.com/';
     auth.signinRedirect({ redirectUri });
   };
 
