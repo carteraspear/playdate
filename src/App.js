@@ -1,5 +1,6 @@
 import './App.css';
 import { useAuth } from 'react-oidc-context';
+import { useEffect } from 'react';
 
 function Playdate() {
   const auth = useAuth();
@@ -11,6 +12,21 @@ function Playdate() {
     window.location.href = `${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${encodeURIComponent(logoutUri)}`;
   };
 
+  const signInRedirect = () => {
+    const redirectUri = 'https://d84l1y8p4kdic.cloudfront.net';
+    auth.signinRedirect({ redirectUri });
+  };
+
+  useEffect(() => {
+    // Handle the redirect callback if the user is returning from the authentication server
+    if (window.location.href.includes('code=') || window.location.href.includes('id_token=')) {
+      auth.signinRedirectCallback().then(() => {
+        // Clear the URL parameters after handling the callback
+        window.history.replaceState({}, document.title, window.location.pathname);
+      });
+    }
+  }, [auth]);
+
   if (auth.isLoading) {
     return <div>loading...</div>;
   }
@@ -18,10 +34,6 @@ function Playdate() {
   if (auth.error) {
     return <div>Error... {auth.error.message}</div>;
   }
-const signInRedirect = () => {
-  const redirectUri = 'https://d84l1y8p4kdic.cloudfront.net';
-  auth.signinRedirect({ redirectUri });
-};
 
   if (auth.isAuthenticated) {
     return (
@@ -38,8 +50,8 @@ const signInRedirect = () => {
   return (
     <div>
       <h1>main sign in page here</h1>
-      <button onClick={() => auth.signinRedirect()}>sign in</button>
-      <button onClick={() => signOutRedirect()}>sign out</button>
+      <button onClick={signInRedirect}>sign in</button>
+      <button onClick={signOutRedirect}>sign out</button>
     </div>
   );
 }
