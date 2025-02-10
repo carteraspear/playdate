@@ -6,6 +6,13 @@ import './App.css';
 function App() {
   const auth = useAuth();
 
+  console.log('Auth state:', {
+    isLoading: auth.isLoading,
+    isAuthenticated: auth.isAuthenticated,
+    error: auth.error,
+    user: auth.user,
+  });
+
   const handleSignIn = () => {
     console.log('Sign In button clicked');
     auth.signinRedirect().then(() => {
@@ -23,34 +30,22 @@ function App() {
     return <div>Encountering error... {auth.error.message}</div>;
   }
 
+  if (!auth.isAuthenticated) {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <h1>Welcome to Playdate: An App For Planning Stuff</h1>
+          <button onClick={handleSignIn}>Sign In</button>
+        </header>
+      </div>
+    );
+  }
+
   return (
     <Router>
       <Routes>
-        <Route
-          path="/"
-          element={
-            auth.isAuthenticated ? (
-              <Navigate to="/home" />
-            ) : (
-              <div className="App">
-                <header className="App-header">
-                  <h1>Welcome to Playdate: An App For Planning Stuff</h1>
-                  <button onClick={handleSignIn}>Sign In</button>
-                </header>
-              </div>
-            )
-          }
-        />
-        <Route
-          path="/home"
-          element={
-            auth.isAuthenticated ? (
-              <Home />
-            ) : (
-              <Navigate to="/" />
-            )
-          }
-        />
+        <Route path="/" element={<Navigate to="/home" />} />
+        <Route path="/home" element={<Home />} />
       </Routes>
     </Router>
   );
