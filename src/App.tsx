@@ -1,6 +1,7 @@
 import { useAuth } from 'react-oidc-context';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import Home from './Home';
 import './App.css';
-
 
 function App() {
   const auth = useAuth();
@@ -22,25 +23,36 @@ function App() {
     return <div>Encountering error... {auth.error.message}</div>;
   }
 
-  if (auth.isAuthenticated) {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <h1>Welcome</h1>
-          <pre>Hello: {auth.user?.profile.email}</pre>
-          <button onClick={() => auth.removeUser()}>Sign Out</button>
-        </header>
-      </div>
-    );
-  }
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Welcome</h1>
-        <button onClick={handleSignIn}>Sign In</button>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            auth.isAuthenticated ? (
+              <Navigate to="/home" />
+            ) : (
+              <div className="App">
+                <header className="App-header">
+                  <h1>Welcome to Playdate: An App For Planning Stuff</h1>
+                  <button onClick={handleSignIn}>Sign In</button>
+                </header>
+              </div>
+            )
+          }
+        />
+        <Route
+          path="/home"
+          element={
+            auth.isAuthenticated ? (
+              <Home />
+            ) : (
+              <Navigate to="/" />
+            )
+          }
+        />
+      </Routes>
+    </Router>
   );
 }
 
