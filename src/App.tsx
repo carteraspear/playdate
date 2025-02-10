@@ -1,20 +1,19 @@
 import { useAuth } from 'react-oidc-context';
+import { Routes, Route } from 'react-router-dom'; // Import Routes and Route
 import './App.css';
-
-// Define a type for the user profile
-interface UserProfile {
-  email?: string;
-}
+import Home from './Home'; // Import the Home component
+import Callback from './Callback'; // Import the Callback component
 
 function App() {
   const auth = useAuth();
 
   const handleSignIn = () => {
-    auth.signinRedirect(); // Redirect to Cognito for sign-in
-  };
-
-  const handleSignOut = () => {
-    auth.removeUser(); // Clear the user session
+    console.log('Sign In button clicked');
+    auth.signinRedirect().then(() => {
+      console.log('Redirecting to Cognito...');
+    }).catch((error: Error) => {
+      console.error('Error during sign-in redirect:', error);
+    });
   };
 
   if (auth.isLoading) {
@@ -26,16 +25,12 @@ function App() {
   }
 
   if (auth.isAuthenticated) {
-    const userProfile = auth.user?.profile as UserProfile; // Cast the profile to the UserProfile type
     return (
       <div className="App">
         <header className="App-header">
           <h1>Welcome</h1>
-          <pre>Hello: {userProfile.email}</pre>
-          <pre>ID Token: {auth.user?.id_token}</pre>
-          <pre>Access Token: {auth.user?.access_token}</pre>
-          <pre>Refresh Token: {auth.user?.refresh_token}</pre>
-          <button onClick={handleSignOut}>Sign Out</button>
+          <pre>Hello: {auth.user?.profile.email}</pre>
+          <button onClick={() => auth.removeUser()}>Sign Out</button>
         </header>
       </div>
     );
