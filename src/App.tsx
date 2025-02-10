@@ -1,8 +1,6 @@
 import { useAuth } from 'react-oidc-context';
-import { Routes, Route } from 'react-router-dom'; // Import Routes and Route
 import './App.css';
-import Home from './Home'; // Import the Home component
-import Callback from './Callback'; // Import the Callback component
+
 
 function App() {
   const auth = useAuth();
