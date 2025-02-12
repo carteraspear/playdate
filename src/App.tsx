@@ -1,10 +1,11 @@
 import { useAuth } from 'react-oidc-context';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useState } from 'react'; // Import useState
 import './index.css';
+import Home from './Home'; // Add this line
 
 function App() {
   const auth = useAuth();
-  const navigate = useNavigate(); // Initialize useNavigate
+  const [showHome, setShowHome] = useState(false); // State to control rendering
 
   console.log('Auth state:', {
     isLoading: auth.isLoading,
@@ -26,7 +27,7 @@ function App() {
 
   const handleCreateEvent = () => {
     console.log('Create Event button clicked');
-    navigate('/home'); // Navigate to /home
+    setShowHome(true); // Show the Home component
   };
 
   if (auth.isLoading) {
@@ -55,14 +56,19 @@ function App() {
   }
 
   // After authentication, display the "Welcome" message and a button
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Welcome</h1>
-        <button onClick={handleCreateEvent}>Create an Event</button>
-      </header>
-    </div>
-  );
+  if (!showHome) {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <h1>Welcome</h1>
+          <button onClick={handleCreateEvent}>Create an Event</button>
+        </header>
+      </div>
+    );
+  }
+
+  // If showHome is true, render the Home component
+  return <Home />;
 }
 
 export default App;
