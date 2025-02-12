@@ -47,10 +47,23 @@ function App() {
   if (!auth.isAuthenticated) {
     return (
       <div className="App">
-        <header className="App-header">
+        {/* Top Bar */}
+        <div className="top-bar">
+          <a href="https://carterspear.com/fix" target="_blank" rel="noopener noreferrer">
+            by Spear Technologies
+          </a>
+        </div>
+
+        {/* Main Content */}
+        <div className="main-content">
           <h1>Welcome to Playdate: An App For Planning Stuff</h1>
           <button onClick={handleSignIn}>Sign In</button>
-        </header>
+        </div>
+
+        {/* Footer */}
+        <div className="footer">
+          © Copyright 2025 Spear Technologies
+        </div>
       </div>
     );
   }
@@ -59,10 +72,23 @@ function App() {
   if (!showHome) {
     return (
       <div className="App">
-        <header className="App-header">
+        {/* Top Bar */}
+        <div className="top-bar">
+          <a href="https://carterspear.com/fix" target="_blank" rel="noopener noreferrer">
+            by Spear Technologies
+          </a>
+        </div>
+
+        {/* Main Content */}
+        <div className="main-content">
           <h1>Welcome</h1>
           <button onClick={handleCreateEvent}>Create an Event</button>
-        </header>
+        </div>
+
+        {/* Footer */}
+        <div className="footer">
+          © Copyright 2025 Spear Technologies
+        </div>
       </div>
     );
   }

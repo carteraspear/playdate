@@ -9,7 +9,7 @@
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased; 
   -moz-osx-font-smoothing: grayscale;
 }
 
@@ -25,14 +25,18 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   min-width: 320px;
   min-height: 100vh;
+  position: relative;
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  margin: 0;
 }
 
 button {
@@ -45,6 +49,7 @@ button {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
+  margin-top: 20px;
 }
 button:hover {
   border-color: #646cff;
@@ -52,6 +57,52 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+/* Top Bar */
+.top-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 20px;
+  background-color: rgba(36, 36, 36, 0.8); /* Match the background color */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.top-bar a {
+  color: rgba(255, 255, 255, 0.87);
+  font-size: 0.9em;
+  text-decoration: none;
+}
+
+.top-bar a:hover {
+  color: #646cff;
+}
+
+/* Main Content */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin-top: -33.33vh; /* Move content up by 1/3rd of the viewport height */
+}
+
+/* Footer */
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  padding: 10px 0;
+  background-color: rgba(36, 36, 36, 0.8); /* Match the background color */
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.9em;
 }
 
 @media (prefers-color-scheme: light) {
@@ -64,5 +115,16 @@ button:focus-visible {
   }
   button {
     background-color: #f9f9f9;
+  }
+  .top-bar {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  .top-bar a {
+    color: #213547;
+  }
+  .footer {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
   }
 }
