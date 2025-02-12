@@ -1,6 +1,4 @@
 import { useAuth } from 'react-oidc-context';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import Home from './Home';
 import './index.css';
 
 function App() {
@@ -15,11 +13,13 @@ function App() {
 
   const handleSignIn = () => {
     console.log('Sign In button clicked');
-    auth.signinRedirect().then(() => {
-      console.log('Redirecting to Cognito...');
-    }).catch((error: Error) => {
-      console.error('Error during sign-in redirect:', error);
-    });
+    auth.signinRedirect()
+      .then(() => {
+        console.log('Redirecting to Cognito...');
+      })
+      .catch((error: Error) => {
+        console.error('Error during sign-in redirect:', error);
+      });
   };
 
   if (auth.isLoading) {
@@ -47,13 +47,13 @@ function App() {
     );
   }
 
+  // After authentication, display the "Welcome" message directly
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Navigate to="/home" />} />
-        <Route path="/home" element={<Home />} />
-      </Routes>
-    </Router>
+    <div className="App">
+      <header className="App-header">
+        <h1>Welcome</h1>
+      </header>
+    </div>
   );
 }
 
