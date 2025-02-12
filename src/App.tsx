@@ -1,8 +1,10 @@
 import { useAuth } from 'react-oidc-context';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import './index.css';
 
 function App() {
   const auth = useAuth();
+  const navigate = useNavigate(); // Initialize useNavigate
 
   console.log('Auth state:', {
     isLoading: auth.isLoading,
@@ -20,6 +22,11 @@ function App() {
       .catch((error: Error) => {
         console.error('Error during sign-in redirect:', error);
       });
+  };
+
+  const handleCreateEvent = () => {
+    console.log('Create Event button clicked');
+    navigate('/home'); // Navigate to /home
   };
 
   if (auth.isLoading) {
@@ -47,11 +54,12 @@ function App() {
     );
   }
 
-  // After authentication, display the "Welcome" message directly
+  // After authentication, display the "Welcome" message and a button
   return (
     <div className="App">
       <header className="App-header">
         <h1>Welcome</h1>
+        <button onClick={handleCreateEvent}>Create an Event</button>
       </header>
     </div>
   );
