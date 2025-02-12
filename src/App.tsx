@@ -27,7 +27,13 @@ function App() {
   }
 
   if (auth.error) {
-    return <div>Encountering error... {auth.error.message}</div>;
+    return (
+      <div>
+        <h1>Encountering an error</h1>
+        <p>{auth.error.message}</p>
+        <button onClick={handleSignIn}>Retry Sign In</button>
+      </div>
+    );
   }
 
   if (!auth.isAuthenticated) {
