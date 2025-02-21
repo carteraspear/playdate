@@ -21,7 +21,7 @@ const cognitoAuthConfig = {
 };
 
 root.render(
-  <StrictMode>s
+  <StrictMode>
     <BrowserRouter>
       <AuthProvider {...cognitoAuthConfig}>
         <App />
