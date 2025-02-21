@@ -26,12 +26,13 @@ const Home: React.FC = () => {
     <div className="App">
       {/* Top Bar */}
       <div className="top-bar">
+      <button className="dashboard-button" onClick={goToDashboard}>
+          Go to Dashboard
+        </button>
         <a href="https://carterspear.com/fix" target="_blank" rel="noopener noreferrer">
           by Spear Technologies
         </a>
-        <button className="dashboard-button" onClick={goToDashboard}>
-          Go to Dashboard
-        </button>
+
       </div>
 
       {/* Main Content */}
