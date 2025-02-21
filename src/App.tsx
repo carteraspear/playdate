@@ -1,11 +1,11 @@
 import { useAuth } from 'react-oidc-context';
-import { useState } from 'react'; // Import useState
+import { useState } from 'react';
 import './index.css';
-import Home from './Home'; // Add this line
+import Home from './Home';
 
 function App() {
   const auth = useAuth();
-  const [showHome, setShowHome] = useState(false); // State to control rendering
+  const [showHome, setShowHome] = useState(false);
 
   console.log('Auth state:', {
     isLoading: auth.isLoading,
@@ -27,7 +27,11 @@ function App() {
 
   const handleCreateEvent = () => {
     console.log('Create Event button clicked');
-    setShowHome(true); // Show the Home component
+    setShowHome(true);
+  };
+
+  const goToDashboard = () => {
+    window.location.href = 'Dashboard.tsx'; // Redirect to Dashboard.tsx
   };
 
   if (auth.isLoading) {
@@ -47,20 +51,15 @@ function App() {
   if (!auth.isAuthenticated) {
     return (
       <div className="App">
-        {/* Top Bar */}
         <div className="top-bar">
           <a href="https://carterspear.com/fix" target="_blank" rel="noopener noreferrer">
             by Spear Technologies
           </a>
         </div>
-
-        {/* Main Content */}
         <div className="main-content">
           <h1>Welcome to Playdate: An App For Planning Stuff</h1>
           <button onClick={handleSignIn}>Sign In</button>
         </div>
-
-        {/* Footer */}
         <div className="footer">
           © Copyright 2025 Spear Technologies
         </div>
@@ -68,24 +67,21 @@ function App() {
     );
   }
 
-  // After authentication, display the "Welcome" message and a button
   if (!showHome) {
     return (
       <div className="App">
-        {/* Top Bar */}
         <div className="top-bar">
+          <button className="dashboard-button" onClick={goToDashboard}>
+            Go to Dashboard
+          </button>
           <a href="https://carterspear.com/fix" target="_blank" rel="noopener noreferrer">
             by Spear Technologies
           </a>
         </div>
-
-        {/* Main Content */}
         <div className="main-content">
           <h1>Welcome</h1>
           <button onClick={handleCreateEvent}>Create an Event</button>
         </div>
-
-        {/* Footer */}
         <div className="footer">
           © Copyright 2025 Spear Technologies
         </div>
@@ -93,7 +89,6 @@ function App() {
     );
   }
 
-  // If showHome is true, render the Home component
   return <Home />;
 }
 
