@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './index.css'; // Make sure the CSS file is imported for styling
+import './index.css'; // Ensure this file is correctly styled
 
 const Home: React.FC = () => {
   const [image, setImage] = useState<string>('');
@@ -26,28 +26,28 @@ const Home: React.FC = () => {
     <div className="App">
       {/* Top Bar */}
       <div className="top-bar">
-      <button className="dashboard-button" onClick={goToDashboard}>
+        <button className="dashboard-button" onClick={goToDashboard}>
           Go to Dashboard
         </button>
         <a href="https://carterspear.com/fix" target="_blank" rel="noopener noreferrer">
           by Spear Technologies
         </a>
-
       </div>
 
       {/* Main Content */}
       <div className="main-content">
         <h1>Create an Event</h1>
-        <div>
+
+        <div className="image-section">
           <img 
             src={image || 'default-image.jpg'} 
             alt="Event" 
-            style={{ width: '100%', height: 'auto', maxHeight: '300px' }} 
+            className="event-image"
           />
-          <button onClick={handleImageChange}>Change Image</button>
+          <button className="change-image-button" onClick={handleImageChange}>Change Image</button>
         </div>
 
-        <div>
+        <div className="input-group">
           <label>Title:</label>
           <input
             type="text"
@@ -57,9 +57,9 @@ const Home: React.FC = () => {
           />
         </div>
 
-        <div>
+        <div className="input-group">
           <label>Date and Time:</label>
-          <div>
+          <div className="date-time">
             <input
               type="date"
               value={eventDate}
@@ -73,7 +73,7 @@ const Home: React.FC = () => {
           </div>
         </div>
 
-        <div>
+        <div className="input-group">
           <label>Location:</label>
           <input
             type="text"
@@ -83,7 +83,7 @@ const Home: React.FC = () => {
           />
         </div>
 
-        <div>
+        <div className="input-group">
           <label>RSVP Limit:</label>
           <input
             type="number"
@@ -93,7 +93,7 @@ const Home: React.FC = () => {
           />
         </div>
 
-        <div>
+        <div className="input-group">
           <label>Ticket Cost:</label>
           <input
             type="number"
@@ -103,7 +103,7 @@ const Home: React.FC = () => {
           />
         </div>
 
-        <div>
+        <div className="input-group">
           <label>Description:</label>
           <textarea
             value={description}
