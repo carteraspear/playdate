@@ -1,3 +1,3 @@
 # React + TypeScript + Vite
 
-I dunno what this is yet
+this will be an app for scheduling
